@@ -1,2 +1,2 @@
 # fastapi_training
-to learn FARM Stack development for Single Page Application for SPA
+to learn FARM Stack development for Single Page Application or SPA
