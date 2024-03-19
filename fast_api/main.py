@@ -23,8 +23,8 @@ app.include_router(route_auth.router)
 origins = ['http://localhost:3000'] #後でReactから呼ぶためのホワイトリスト
 app.add_middleware(
     CORSMiddleware,
-    #allow_origins=origins,
-    allow_origins=["*"],  # 全てのオリジンからのアクセスを許可 (必要に応じて適切なオリジンを指定) by ChatGPT
+    allow_origins=origins,
+    #allow_origins=["*"],  # 全てのオリジンからのアクセスを許可 (必要に応じて適切なオリジンを指定) by ChatGPT
     allow_credentials=True,
     #allow_methods=["*"],
     allow_methods=["GET", "POST", "PUT", "DELETE"],  # 適切なHTTPメソッドを許可 by ChatGPT
