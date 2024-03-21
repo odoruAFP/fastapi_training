@@ -26,8 +26,8 @@ app.add_middleware(
     allow_origins=origins,
     #allow_origins=["*"],  # 全てのオリジンからのアクセスを許可 (必要に応じて適切なオリジンを指定) by ChatGPT
     allow_credentials=True,
-    #allow_methods=["*"],
-    allow_methods=["GET", "POST", "PUT", "DELETE"],  # 適切なHTTPメソッドを許可 by ChatGPT
+    allow_methods=["*"],
+    #allow_methods=["GET", "POST", "PUT", "DELETE"],  # 適切なHTTPメソッドを許可 by ChatGPT
     allow_headers=["*"],
 )
 
