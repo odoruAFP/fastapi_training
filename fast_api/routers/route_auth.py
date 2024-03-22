@@ -53,5 +53,5 @@ async def logout(request: Request, response: Response, csrf_protect: CsrfProtect
 def get_user_refresh_jwt(request: Request, response: Response):
     new_token, subject = auth.verify_update_jwt(request)
     response.set_cookie(
-        key="access_token", value=f"Bearer {token}", httponly=True, samesite="none", secure=True)
+        key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
     return {'email': subject}  
