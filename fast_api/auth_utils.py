@@ -37,13 +37,13 @@ class AuthJwtCsrf():
             raise HTTPException(
                 status_code=401, detail='The JWT has expired')
         except jwt.InvalidTokenError as e:
-            raise HTTPException(status_code=401, detail='JWT is not valid') #空のトークンや、JWTと異なる様式が来たときの処理
+            raise HTTPException(status_code=411, detail='JWT is not valid') #空のトークンや、JWTと異なる様式が来たときの処理
     
     def verify_jwt(self, request) -> str:
         token = request.cookies.get("access_token")
         if not token:
             raise HTTPException(
-                status_code=401, detail='No JWT exist: may not set yet or deleted'
+                status_code=421, detail='No JWT exist: may not set yet or deleted'
             )
         _, _, value = token.partition(" ") #いちばん後ろの値だけを取り込む
         subject = self.decode_jwt(value)

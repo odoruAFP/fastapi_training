@@ -26,7 +26,7 @@ def todo_serializer(todo) -> dict:
 def user_serializer(user) -> dict:
     return{
         "id": str(user["_id"]),
-        "email": user["email"]
+        "email": user["email"],
     }
 
 async def db_create_todo(data: dict) -> Union[dict, bool]:
@@ -93,7 +93,7 @@ async def db_login(data: dict) -> str:
     user = await collection_user.find_one({"email":email})
     if not user or not auth.verify_pw(password, user["password"]):
         raise HTTPException(
-            status_code=401, detail='Invalid email or password'
+            status_code=491, detail='Invalid email or password'
         )
     token = auth.encode_jwt(user['email'])
     return token
