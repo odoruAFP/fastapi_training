@@ -34,11 +34,11 @@ async def login(request: Request, response: Response, user: UserBody, csrf_prote
     csrf_protect.validate_csrf(csrf_token)
     user = jsonable_encoder(user)
     token = await db_login(user) #問題がなければJWTのレスポンスが返ってくる
-#    response.set_cookie(
-#        key="access_token", value=f"Bearer {token}", httponly=True, samesite="none", secure=True)
     response.set_cookie(
-        key="access_token", value=f"Bearer {token}", httponly=True, samesite="none", secure=True, 
-        domain="https://fastapi-training-gns2.onrender.com", partitioned=True)
+        key="access_token", value=f"Bearer {token}", httponly=True, samesite="none", secure=True)
+#    response.set_cookie(
+#        key="access_token", value=f"Bearer {token}", httponly=True, samesite="none", secure=True, 
+#        domain="https://fastapi-training-gns2.onrender.com", partitioned=True)
     return {"message": "Successfully logged-in"} #tokenを設定したり、tokenをデリートする作業は全てサーバーサイドで行う tokenに実際のJWTを格納していく
 
 
@@ -47,22 +47,22 @@ async def login(request: Request, response: Response, user: UserBody, csrf_prote
 async def logout(request: Request, response: Response, csrf_protect: CsrfProtect = Depends()):
     csrf_token = csrf_protect.get_csrf_from_headers(request.headers)
     csrf_protect.validate_csrf(csrf_token)
-#    response.set_cookie(
-#        key="access_token", value=f"", httponly=True, samesite="none", secure=True)    
     response.set_cookie(
-        key="access_token", value=f"", httponly=True, samesite="none", secure=True, 
-        domain="https://fastapi-training-gns2.onrender.com", partitioned=True)
+        key="access_token", value=f"", httponly=True, samesite="none", secure=True)    
+#    response.set_cookie(
+#        key="access_token", value=f"", httponly=True, samesite="none", secure=True, 
+#        domain="https://fastapi-training-gns2.onrender.com", partitioned=True)
     return {"message": "Successfully logged-out"} 
 
 
 @router.get('/api/user', response_model=UserInfo)
 def get_user_refresh_jwt(request: Request, response: Response):
     new_token, subject = auth.verify_update_jwt(request)
-#    response.set_cookie(
-#       key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
     response.set_cookie(
-        key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True, 
-        domain="https://fastapi-training-gns2.onrender.com", partitioned=True)
+       key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
+#    response.set_cookie(
+#        key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True, 
+#        domain="https://fastapi-training-gns2.onrender.com", partitioned=True)
     return {'email': subject}  
 
 #トラッキングに利用できない3rdパーティクッキー「CHIPS」の仕組み (partitioned属性)
