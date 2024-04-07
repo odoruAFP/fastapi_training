@@ -20,7 +20,7 @@ from fastapi_csrf_protect.exceptions import CsrfProtectError
 app = FastAPI()
 app.include_router(route_todo.router)
 app.include_router(route_auth.router)
-origins = ['http://localhost:3000'] #後でReactから呼ぶためのホワイトリスト
+origins = ['http://localhost:3000', 'https://fastapi-5292f.web.app'] #後でReactから呼ぶためのホワイトリスト
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
